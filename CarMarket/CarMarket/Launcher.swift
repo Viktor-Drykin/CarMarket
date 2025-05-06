@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class Launcher {
     
@@ -24,8 +25,8 @@ class Launcher {
 //        let viewModel = RepositoryListViewModel(repositoriesService: repositoriesService)
 //        viewController.viewModel = viewModel
 //        navigationController?.viewControllers = [viewController]
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .green
+        let view = FeatureFactory.carsFeature()
+        let viewController = UIHostingController(rootView: view)
         navigationController?.viewControllers = [viewController]
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
