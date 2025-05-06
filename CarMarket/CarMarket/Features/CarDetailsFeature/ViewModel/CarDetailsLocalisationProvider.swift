@@ -9,5 +9,5 @@
 struct CarDetailsLocalisationProvider {
     
     var priceIsNotSet: String { "Check the price with the owner" }
-    
+    var noDetails: String { "No details found" }
 }
