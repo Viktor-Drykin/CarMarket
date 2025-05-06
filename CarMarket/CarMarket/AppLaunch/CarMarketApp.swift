@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-@main
+//TODO: remove
+//@main
 struct CarMarketApp: App {
     var body: some Scene {
         WindowGroup {
