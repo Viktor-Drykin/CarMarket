@@ -9,5 +9,4 @@ enum CarNetworkServiceError: Error {
     case incorrectURL
     case invalidStatusCode
     case failedToDecode
-    case empty
 }

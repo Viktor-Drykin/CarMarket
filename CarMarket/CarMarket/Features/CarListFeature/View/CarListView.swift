@@ -10,8 +10,6 @@ import SwiftUI
 struct CarListView: View {
 
     @ObservedObject var viewModel: CarListViewModel
-    //@State private var showingDetails = false
-    @State private var selectedCarItem: Int?
 
     private let columns = [
         GridItem(.flexible(), spacing: 10),
@@ -30,8 +28,7 @@ struct CarListView: View {
                     LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
                         ForEach(viewModel.cars) { item in
                             Button {
-                                selectedCarItem = item.id
-                                //showingDetails.toggle()
+                                viewModel.didTapCarDetails(with: item.id)
                             } label: {
                                 makeCarItemView(width: (proxy.size.width - 30) / 2, item: item)
                             }
@@ -47,9 +44,6 @@ struct CarListView: View {
                     .modifier(Headline())
             }
         }
-//        .sheet(item: $selectedCarItem) { item in
-//            CarDetailsView(carItem: item)
-//        }
         .task {
             await viewModel.loadCars()
         }
@@ -80,9 +74,8 @@ struct CarListView: View {
 
 //#Preview {
 //    let networkService = NetworkClient()
-//    let carService = CarNetworkServiceImpl(networkService: networkService)
-//    let viewModel = CarListViewModel(carService: carService)
+//    let carService = CarRepository
+//    let viewModel = CarListViewModel(carService: )
 //    let view = CarListView(viewModel: viewModel)
 //    return view
 //}
-

@@ -15,11 +15,13 @@ final class CarListViewModel: ObservableObject {
     private let carService: CarsFetchable
     private let localisationProvider: CarListLocalisationProvider
     private let mapper: CarMapper
+    private let router: CarDetailsRoute
 
-    init(carService: CarsFetchable, localisationProvider: CarListLocalisationProvider) {
+    init(carService: CarsFetchable, localisationProvider: CarListLocalisationProvider, router: CarDetailsRoute) {
         self.carService = carService
         self.localisationProvider = localisationProvider
         self.mapper = CarMapper(localisationProvider: localisationProvider)
+        self.router = router
     }
 
     func loadCars() async {
@@ -30,6 +32,10 @@ final class CarListViewModel: ObservableObject {
         } catch {
             await handleState(error: error)
         }
+    }
+    
+    func didTapCarDetails(with id: Int) {
+        router.showCarDetails(with: id)
     }
     
     @MainActor private func handleState(cars mappedCars: [CarListModel]) async {
@@ -44,11 +50,11 @@ final class CarListViewModel: ObservableObject {
 
     private func handle(error: Error) -> String {
         switch error {
-        case CarServiceError.empty:
+        case CarRepositoryError.empty:
             return localisationProvider.noCarsMessage
-        case CarServiceError.invalidRequestData:
+        case CarRepositoryError.invalidRequestData:
             return localisationProvider.invalidRequestDataMessage
-        case CarServiceError.failedToDecode:
+        case CarRepositoryError.failedToDecode:
             return localisationProvider.failedToDecodeMessage
         default:
             return localisationProvider.unknownErrorMessage

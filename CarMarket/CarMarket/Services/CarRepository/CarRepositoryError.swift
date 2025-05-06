@@ -5,7 +5,7 @@
 //  Created by Viktor Drykin on 06.05.2025.
 //
 
-enum CarServiceError: Error {
+enum CarRepositoryError: Error {
     case invalidRequestData
     case failedToDecode
     case empty

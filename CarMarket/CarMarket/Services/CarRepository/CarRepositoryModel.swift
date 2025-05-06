@@ -1,11 +1,11 @@
 //
-//  CarServiceModel.swift
+//  CarRepositoryModel.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 06.05.2025.
 //
 
-struct CarServiceModel {
+struct CarRepositoryModel {
     let id: Int
     let make: String
     let model: String

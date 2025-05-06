@@ -14,7 +14,7 @@ struct CarMapper {
         self.localisationProvider = localisationProvider
     }
 
-    func map(response: [CarServiceModel]) -> [CarListModel] {
+    func map(response: [CarRepositoryModel]) -> [CarListModel] {
         response.map { carModel in
             let price = NumberFormatter.currency.string(from: NSNumber(value: carModel.price)) ?? localisationProvider.priceIsNotSet
             return .init(
@@ -25,20 +25,9 @@ struct CarMapper {
             )
         }
     }
-//  let mileage = MeasurementFormatter.measurement.string(from: Measurement(value: Double(carModel.mileage), unit: UnitLength.kilometers))
-    
-//    static private func map(firstResignation: String?) -> String? {
-//        guard
-//            let firstResignation = firstResignation,
-//            let date = DateFormatter.apiDate.date(from: firstResignation)
-//        else {
-//            return nil
-//        }
-//        return DateFormatter.monthAndYearDate.string(from: date)
-//    }
 }
 
-extension NumberFormatter {
+private extension NumberFormatter {
     static let currency: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.currencyCode = "EUR"

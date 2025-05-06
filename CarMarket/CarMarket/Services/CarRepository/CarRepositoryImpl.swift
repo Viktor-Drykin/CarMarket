@@ -1,49 +1,47 @@
 //
-//  CarServiceImpl.swift
+//  CarRepositoryImpl.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 06.05.2025.
 //
 
-final class CarServiceImpl {
+final class CarRepositoryImpl {
     
     private let carNetworkService: CarNetworkService
-    private var carModels: [CarServiceModel] = []
+    private var carModels: [CarRepositoryModel] = []
     
     init(carNetworkService: CarNetworkService) {
         self.carNetworkService = carNetworkService
     }
 }
 
-extension CarServiceImpl: CarsFetchable {
+extension CarRepositoryImpl: CarsFetchable {
     
-    func fetchCars() async throws -> [CarServiceModel] {
+    func fetchCars() async throws -> [CarRepositoryModel] {
         do {
             let responseCars = try await carNetworkService.fetchCars()
             carModels = responseCars.map { .init(with: $0) }
             return carModels
         } catch CarNetworkServiceError.failedToDecode {
-            throw CarServiceError.failedToDecode
+            throw CarRepositoryError.failedToDecode
         } catch CarNetworkServiceError.invalidStatusCode {
-            throw CarServiceError.invalidRequestData
+            throw CarRepositoryError.invalidRequestData
         } catch CarNetworkServiceError.incorrectURL {
-            throw CarServiceError.invalidRequestData
-        } catch CarNetworkServiceError.empty {
-            throw CarServiceError.empty
+            throw CarRepositoryError.invalidRequestData
         } catch {
-            throw CarServiceError.unknown
+            throw CarRepositoryError.unknown
         }
     }
 }
 
 //TODO: Do I need this protocol?
-extension CarServiceImpl: CarDetailsProviding {
-    func carDetails(by id: Int) async throws -> CarServiceModel? {
+extension CarRepositoryImpl: CarDetailsProviding {
+    func carDetails(by id: Int) async -> CarRepositoryModel? {
         carModels.first(where: { $0.id == id })
     }
 }
 
-extension CarServiceModel {
+extension CarRepositoryModel {
     init(with response: Response.Car) {
         self.init(
             id: response.id,
@@ -61,7 +59,7 @@ extension CarServiceModel {
     }
 }
 
-extension CarServiceModel.Seller {
+extension CarRepositoryModel.Seller {
     init?(with response: Response.Seller?) {
         guard let response else { return nil }
         self.type = response.type

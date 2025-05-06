@@ -29,9 +29,6 @@ extension CarNetworkServiceImpl: CarNetworkService {
 
         do {
             let cars: [Response.Car] = try await networkService.perform(urlRequest: request)
-            guard !cars.isEmpty else {
-                throw CarNetworkServiceError.empty
-            }
             return cars
         } catch NetworkError.failedToDecode {
             throw CarNetworkServiceError.failedToDecode

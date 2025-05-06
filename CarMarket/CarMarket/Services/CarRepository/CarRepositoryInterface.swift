@@ -6,9 +6,9 @@
 //
 
 protocol CarsFetchable {
-    func fetchCars() async throws -> [CarServiceModel]
+    func fetchCars() async throws -> [CarRepositoryModel]
 }
 
 protocol CarDetailsProviding {
-    func carDetails(by id: Int) async throws -> CarServiceModel?
+    func carDetails(by id: Int) async -> CarRepositoryModel?
 }
