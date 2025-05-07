@@ -5,11 +5,11 @@
 //  Created by Viktor Drykin on 06.05.2025.
 //
 
-protocol CarsFetchable {
+protocol CarsFetchable: AnyObject {
     func fetchCars() async throws -> [CarRepositoryModel]
 }
 
-protocol CarDetailsProviding {
+protocol CarDetailsProviding: AnyObject {
     func carDetails(by id: Int) async -> CarRepositoryModel?
 }
 

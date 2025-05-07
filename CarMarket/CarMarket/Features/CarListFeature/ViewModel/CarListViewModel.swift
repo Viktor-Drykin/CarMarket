@@ -14,11 +14,11 @@ final class CarListViewModel: ObservableObject {
     @MainActor @Published var cars: [CarListModel] = []
 
     private let carService: CarsFetchable
-    private let localisationProvider: CarListLocalisationProvider
+    private let localisationProvider: CarListLocalisationProviding
     private let mapper: CarMapper
     private let router: CarDetailsRoute
 
-    init(carService: CarsFetchable, localisationProvider: CarListLocalisationProvider, router: CarDetailsRoute) {
+    init(carService: CarsFetchable, localisationProvider: CarListLocalisationProviding, router: CarDetailsRoute) {
         self.carService = carService
         self.localisationProvider = localisationProvider
         self.mapper = CarMapper(localisationProvider: localisationProvider)
