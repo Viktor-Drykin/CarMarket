@@ -16,24 +16,29 @@ struct CarDetailsView: View {
     }
 
     var body: some View {
-        if let model = viewModel.carDetailsModel {
-            content(with: model)
-        } else if let message = viewModel.message  {
-            Text(message)
-        } else {
-            ProgressView()
+        VStack(spacing: 0) {
+            if let model = viewModel.carDetailsModel {
+                content(with: model)
+            } else if let message = viewModel.message  {
+                Text(message)
+            } else {
+                ProgressView()
+            }
+        }
+        .task {
+            await viewModel.loadCars()
         }
     }
     
     private func content(with model: CarDetailsModel) -> some View {
         List {
-            if let images = viewModel.carDetailsModel?.images {
+            if let images = viewModel.carDetailsModel?.images, !images.isEmpty {
                 imagesView(with: images)
                     .listRowSeparator(.hidden)
             }
             
             ForEach(model.lineItems, id: \.self) { item in
-                HStack {
+                HStack(alignment: .firstTextBaseline) {
                     Text(item.title)
                         .modifier(Headline())
                     Text(item.description)

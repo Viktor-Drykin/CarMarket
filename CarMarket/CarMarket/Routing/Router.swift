@@ -34,6 +34,8 @@ protocol Routable: AnyObject {
 protocol Router: Routable {
     /// The root view controller of this router.
     var root: UIViewController? { get set }
+    
+    var featureFactory: FeaturesFactoryInterface { get }
 
     // Depending on the App's architecture it may be better to expose
     // a way of accessing dependencies in the Routers through a DI Container,

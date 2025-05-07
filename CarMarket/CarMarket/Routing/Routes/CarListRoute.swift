@@ -14,8 +14,8 @@ protocol CarListRoute {
 extension CarListRoute where Self: Router {
     
     func makeCarList() -> UIViewController {
-        let router = DefaultRouter(rootTransition: EmptyTransition())
-        let viewController = FeatureFactory.carsFeature(router: router)
+        let router = DefaultRouter(rootTransition: EmptyTransition(), featureFactory: featureFactory)
+        let viewController = featureFactory.makeCarListFeature(router: router)
         router.root = viewController
         return viewController
     }

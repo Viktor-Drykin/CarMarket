@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct LocalizationEngine {
+final class LocalizationEngine {
     
     private let locale: Locale
     

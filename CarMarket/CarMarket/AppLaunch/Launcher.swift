@@ -11,18 +11,20 @@ import SwiftUI
 final class Launcher {
     
     private let window: UIWindow?
-    private let navigationController : UINavigationController?
-    private let router: CarListRoute
+    private let navigationController: UINavigationController
+    private var router: DefaultRouter
 
-    init(window: UIWindow?, router: CarListRoute) {
+    init(window: UIWindow?) {
         self.window = window
-        self.router = router
+        let engine = Engine()
+        let featureFactory = FeaturesFactory(engine: engine)
+        router = DefaultRouter(rootTransition: EmptyTransition(), featureFactory: featureFactory)
         navigationController = UINavigationController()
     }
 
     func start() {
         let carListViewController = router.makeCarList()
-        navigationController?.viewControllers = [carListViewController]
+        navigationController.viewControllers = [carListViewController]
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }

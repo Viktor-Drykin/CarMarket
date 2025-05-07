@@ -13,21 +13,12 @@ protocol CarDetailsRoute {
 
 extension CarDetailsRoute where Self: Router {
     func makeCarDetails(with transition: Transition, id: Int) {
-        let router = DefaultRouter(rootTransition: transition)
-        
-        
-        //let viewModel = LoginViewModel(router: router)
-        //let viewController = LoginViewController(viewModel: viewModel)
-        //let navigationController = UINavigationController(rootViewController: viewController)
-        let viewController = FeatureFactory.carDetailsFeature(router: router, id: id)
-        viewController.view.backgroundColor = .yellow
-//        router.root = viewController
-
+        let viewController = featureFactory.makeCarDetailsFeature(carId: id)
         route(to: viewController, as: transition)
     }
     
     func showCarDetails(with id: Int) {
-        makeCarDetails(with: PushTransition(), id: id)
+        makeCarDetails(with: ModalTransition(), id: id)
     }
 }
 

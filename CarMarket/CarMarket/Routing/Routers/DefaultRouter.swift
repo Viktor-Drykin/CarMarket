@@ -10,9 +10,11 @@ import UIKit
 class DefaultRouter: NSObject, Router, Closable, Dismissable {
     private let rootTransition: Transition
     weak var root: UIViewController?
+    var featureFactory: FeaturesFactoryInterface
 
-    init(rootTransition: Transition) {
+    init(rootTransition: Transition, featureFactory: FeaturesFactoryInterface) {
         self.rootTransition = rootTransition
+        self.featureFactory = featureFactory
     }
 
     deinit {
