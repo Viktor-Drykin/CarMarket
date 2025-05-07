@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol NetworkService {
+protocol NetworkService: AnyObject {
     func perform<Output: Decodable>(urlRequest: URLRequest) async throws -> Output
 }

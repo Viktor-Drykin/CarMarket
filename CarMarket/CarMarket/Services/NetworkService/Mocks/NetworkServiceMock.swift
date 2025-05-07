@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class NetworkServiceMock: NetworkService {
+final class NetworkServiceMock: NetworkService {
     
     var result: Result<Any, NetworkError> = .failure(.failedToDecode)
     

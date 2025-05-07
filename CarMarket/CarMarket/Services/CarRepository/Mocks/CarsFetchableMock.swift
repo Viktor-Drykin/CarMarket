@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class CarsFetchableMock: CarsFetchable {
+final class CarsFetchableMock: CarsFetchable {
     
     var result: Result<[CarRepositoryModel], CarRepositoryError> = .success([CarRepositoryModelBuilder().build()])
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CarDetailsProvidingMock: CarDetailsProviding {
+final class CarDetailsProvidingMock: CarDetailsProviding {
     
     var result: CarRepositoryModel? = nil
     

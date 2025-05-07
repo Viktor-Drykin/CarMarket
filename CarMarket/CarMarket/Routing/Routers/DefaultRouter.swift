@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultRouter: NSObject, Router, Closable, Dismissable {
+final class DefaultRouter: NSObject, Router, Closable, Dismissable {
     private let rootTransition: Transition
     weak var root: UIViewController?
     var featureFactory: FeaturesFactoryInterface
