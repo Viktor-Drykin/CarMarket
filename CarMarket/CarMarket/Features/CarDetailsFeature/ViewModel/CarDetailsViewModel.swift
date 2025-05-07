@@ -17,7 +17,9 @@ final class CarDetailsViewModel: ObservableObject {
     private let mapper: CarDetailsMapper
     private let carID: Int
 
-    init(carService: CarDetailsProviding, localisationProvider: CarDetailsLocalisationProviding, carID: Int) {
+    init(carService: CarDetailsProviding,
+         localisationProvider: CarDetailsLocalisationProviding,
+         carID: Int) {
         self.carService = carService
         self.localisationProvider = localisationProvider
         self.mapper = CarDetailsMapper(localisationProvider: localisationProvider)

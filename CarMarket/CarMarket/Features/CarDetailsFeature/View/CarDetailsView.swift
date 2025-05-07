@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CarDetailsView: View {
-
+    
     @ObservedObject var viewModel: CarDetailsViewModel
-
+    
     init(viewModel: CarDetailsViewModel) {
         self.viewModel = viewModel
     }
-
+    
     var body: some View {
         VStack(spacing: 0) {
             if let model = viewModel.carDetailsModel {
@@ -32,8 +32,8 @@ struct CarDetailsView: View {
     
     private func content(with model: CarDetailsModel) -> some View {
         List {
-            if let images = viewModel.carDetailsModel?.images, !images.isEmpty {
-                imagesView(with: images)
+            if !model.images.isEmpty {
+                imagesView(with: model.images)
                     .listRowSeparator(.hidden)
             }
             
@@ -47,7 +47,7 @@ struct CarDetailsView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-
+    
     private func imagesView(with images: [CarDetailsModel.Image]) -> some View {
         GeometryReader { proxy in
             ScrollView(.horizontal) {
@@ -66,27 +66,13 @@ struct CarDetailsView: View {
     }
 }
 
-//#Preview {
-//    let seller = CarItem.Seller(type: "Private", phone: "123-456-7890", city: "Berlin")
-//
-//    let car = CarItemBuilder()
-//        .setId(1)
-//        .setModel("BMW X5")
-//        .setPrice("$50,000")
-//        .setFirstRegistration("2020-05-01")
-//        .setMileage("20,000 km")
-//        .setFuel("Petrol")
-//        .setImages([
-//            .init(url: "https://loremflickr.com/g/1600/1200/bmw"),
-//            .init(url: "https://loremflickr.com/g/1600/1200/bmw"),
-//            .init(url: "https://loremflickr.com/g/1600/1200/bmw"),
-//            .init(url: "https://loremflickr.com/g/1600/1200/bmw")
-//        ])
-//        .setDescription("A luxury SUV in excellent condition.")
-//        .setModelline("X-Series")
-//        .setSeller(seller)
-//        .setColour("Black")
-//        .build()
-//
-//    CarDetailsView(carItem: car)
-//}
+#Preview {
+    let carService = CarDetailsProvidingMock()
+    carService.result = CarRepositoryModelBuilder().build()
+    let viewModel = CarDetailsViewModel(
+        carService: carService,
+        localisationProvider: CarDetailsLocalisationProviderMock(),
+        carID: 0
+    )
+    return CarDetailsView(viewModel: viewModel)
+}

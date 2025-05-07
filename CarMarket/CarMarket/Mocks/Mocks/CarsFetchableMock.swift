@@ -5,11 +5,10 @@
 //  Created by Viktor Drykin on 07.05.2025.
 //
 import Foundation
-@testable import CarMarket
 
 class CarsFetchableMock: CarsFetchable {
     
-    var result: Result<[CarRepositoryModel], CarRepositoryError> = .success([])
+    var result: Result<[CarRepositoryModel], CarRepositoryError> = .success([CarRepositoryModelBuilder().build()])
     
     func fetchCars() async throws -> [CarMarket.CarRepositoryModel] {
         switch result {

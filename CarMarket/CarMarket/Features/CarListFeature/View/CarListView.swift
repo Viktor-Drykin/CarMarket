@@ -77,10 +77,12 @@ struct CarListView: View {
     }
 }
 
-//#Preview {
-//    let networkService = NetworkClient()
-//    let carService = CarRepository
-//    let viewModel = CarListViewModel(carService: )
-//    let view = CarListView(viewModel: viewModel)
-//    return view
-//}
+#Preview {
+    let viewModel = CarListViewModel(
+        carService: CarsFetchableMock(),
+        localisationProvider: CarListLocalisationProviderMock(),
+        router: CarDetailsRouterSpy()
+    )
+    let view = CarListView(viewModel: viewModel)
+    return view
+}

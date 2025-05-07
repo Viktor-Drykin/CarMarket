@@ -4,7 +4,7 @@
 //
 //  Created by Viktor Drykin on 20.12.2024.
 //
-@testable import CarMarket
+import Foundation
 
 extension Response {
     

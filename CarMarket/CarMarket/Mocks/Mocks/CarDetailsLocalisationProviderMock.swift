@@ -5,7 +5,6 @@
 //  Created by Viktor Drykin on 07.05.2025.
 //
 import Foundation
-@testable import CarMarket
 
 struct CarDetailsLocalisationProviderMock: CarDetailsLocalisationProviding {
     var noDetails = "No details"

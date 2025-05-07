@@ -5,7 +5,6 @@
 //  Created by Viktor Drykin on 07.05.2025.
 //
 import Foundation
-@testable import CarMarket
 
 final class CarListLocalisationProviderMock: CarListLocalisationProviding {
     var noCarsMessage: String = "No cars"

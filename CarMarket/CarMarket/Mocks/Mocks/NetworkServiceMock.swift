@@ -5,7 +5,6 @@
 //  Created by Viktor Drykin on 06.05.2025.
 //
 import Foundation
-@testable import CarMarket
 
 class NetworkServiceMock: NetworkService {
     

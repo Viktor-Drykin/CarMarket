@@ -20,6 +20,7 @@ final class Launcher {
         let featureFactory = FeaturesFactory(engine: engine)
         router = DefaultRouter(rootTransition: EmptyTransition(), featureFactory: featureFactory)
         navigationController = UINavigationController()
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     func start() {
