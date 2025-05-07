@@ -34,36 +34,8 @@ extension CarRepositoryImpl: CarsFetchable {
     }
 }
 
-//TODO: Do I need this protocol?
 extension CarRepositoryImpl: CarDetailsProviding {
     func carDetails(by id: Int) async -> CarRepositoryModel? {
         carModels.first(where: { $0.id == id })
-    }
-}
-
-extension CarRepositoryModel {
-    init(with response: Response.Car) {
-        self.init(
-            id: response.id,
-            make: response.make,
-            model: response.model,
-            price: response.price,
-            firstRegistration: response.firstRegistration,
-            mileage: response.mileage,
-            fuel: response.fuel,
-            imageStrings: response.images?.map { $0.url },
-            description: response.description,
-            modelline: response.modelline,
-            seller: .init(with: response.seller)
-        )
-    }
-}
-
-extension CarRepositoryModel.Seller {
-    init?(with response: Response.Seller?) {
-        guard let response else { return nil }
-        self.type = response.type
-        self.phone = response.phone
-        self.city = response.city
     }
 }

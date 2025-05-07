@@ -9,6 +9,7 @@ import Foundation
 
 final class CarListViewModel: ObservableObject {
 
+    @MainActor @Published var isLoading: Bool = true
     @MainActor @Published var infoMessage: String?
     @MainActor @Published var cars: [CarListModel] = []
 
@@ -39,19 +40,19 @@ final class CarListViewModel: ObservableObject {
     }
     
     @MainActor private func handleState(cars mappedCars: [CarListModel]) async {
+        isLoading = false
         cars = mappedCars
-        infoMessage = nil
+        infoMessage = cars.isEmpty ? localisationProvider.noCarsMessage : nil
     }
     
     @MainActor private func handleState(error: Error) async {
+        isLoading = false
         cars = []
         infoMessage = handle(error: error)
     }
 
     private func handle(error: Error) -> String {
         switch error {
-        case CarRepositoryError.empty:
-            return localisationProvider.noCarsMessage
         case CarRepositoryError.invalidRequestData:
             return localisationProvider.invalidRequestDataMessage
         case CarRepositoryError.failedToDecode:

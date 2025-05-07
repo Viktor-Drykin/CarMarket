@@ -4,44 +4,35 @@
 //
 //  Created by Viktor Drykin on 06.05.2025.
 //
+import Foundation
 
-struct CarDetailsModel {
+struct CarDetailsModel: Identifiable {
     
-    struct Seller {
-        let phone: String
-        let city: String
-        let type: String
+    struct Image: Identifiable {
+        let id = UUID().uuidString
+        let urlString: String
+        
+        init(urlString: String) {
+            self.urlString = urlString
+        }
+    }
+    
+    struct LineItem: Hashable {
+        let title: String
+        let description: String
     }
     
     let id: Int
-    let images: [String]
-    let model: String
-    let fuel: String
-    let price: String
-    let firstRegistration: String?
-    let mileage: String
-    let description: String
-    let seller: Seller?
+    let images: [Image]
+    let lineItems: [LineItem]
     
     init(
-        images: [String],
-        fuel: String,
-        firstRegistration: String?,
-        mileage: String,
-        description: String,
         id: Int,
-        model: String,
-        price: String,
-        seller: Seller?
+        images: [Image],
+        lineItems: [LineItem]
     ) {
         self.id = id
         self.images = images
-        self.fuel = fuel
-        self.firstRegistration = firstRegistration
-        self.mileage = mileage
-        self.description = description
-        self.model = model
-        self.price = price
-        self.seller = seller
+        self.lineItems = lineItems
     }
 }

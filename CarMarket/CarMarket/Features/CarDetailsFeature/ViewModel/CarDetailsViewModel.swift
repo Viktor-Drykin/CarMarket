@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CarDetailsViewModel {
+final class CarDetailsViewModel: ObservableObject {
 
     @MainActor @Published var carDetailsModel: CarDetailsModel?
     @MainActor @Published var message: String?
@@ -30,7 +30,7 @@ final class CarDetailsViewModel {
             await handleEmptyState()
             return
         }
-        let model = mapper.map(domainModel: fetchedCar)
+        let model = mapper.map(model: fetchedCar)
         await handleState(model: model)
     }
     

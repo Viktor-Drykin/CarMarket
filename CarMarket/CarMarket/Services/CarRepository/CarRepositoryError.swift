@@ -8,6 +8,5 @@
 enum CarRepositoryError: Error {
     case invalidRequestData
     case failedToDecode
-    case empty
     case unknown
 }

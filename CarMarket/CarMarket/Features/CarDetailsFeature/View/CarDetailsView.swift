@@ -9,86 +9,56 @@ import SwiftUI
 
 struct CarDetailsView: View {
 
-//    private let carItem: CarItem
-//
-//    init(carItem: CarItem) {
-//        self.carItem = carItem
-//    }
-    
-    var body: some View {
-        EmptyView()
+    @ObservedObject var viewModel: CarDetailsViewModel
+
+    init(viewModel: CarDetailsViewModel) {
+        self.viewModel = viewModel
     }
 
-//    var body: some View {
-//        List {
-//            if !carItem.images.isEmpty {
-//                imagesView
-//                    .listRowSeparator(.hidden)
-//            }
-//
-//            HStack {
-//                Text(carItem.model)
-//                    .bold()
-//                Text(carItem.fuel)
-//                    .foregroundStyle(Color.gray)
-//            }
-//            .listRowSeparator(.hidden)
-//            .frame(maxWidth: .infinity)
-//
-//            HStack {
-//                Text("Price: ")
-//                    .modifier(Headline())
-//                Text(carItem.price)
-//            }
-//
-//            if let firstRegistration = carItem.firstRegistration {
-//                HStack {
-//                    Text("Registration: ")
-//                        .modifier(Headline())
-//                    Text(firstRegistration)
-//                }
-//            }
-//
-//            HStack {
-//                Text("Mileage:")
-//                    .modifier(Headline())
-//                Text(carItem.mileage)
-//            }
-//
-//            VStack(alignment: .leading) {
-//                Text("Description:")
-//                    .modifier(Headline())
-//                Text(carItem.description)
-//            }
-//
-//            if let seller = carItem.seller {
-//                VStack(alignment: .leading) {
-//                    Text("Seller:")
-//                        .modifier(Headline())
-//                    Text(seller.city)
-//                    Text(seller.phone)
-//                    Text(seller.type)
-//                }
-//            }
-//        }
-//    }
+    var body: some View {
+        if let model = viewModel.carDetailsModel {
+            content(with: model)
+        } else if let message = viewModel.message  {
+            Text(message)
+        } else {
+            ProgressView()
+        }
+    }
+    
+    private func content(with model: CarDetailsModel) -> some View {
+        List {
+            if let images = viewModel.carDetailsModel?.images {
+                imagesView(with: images)
+                    .listRowSeparator(.hidden)
+            }
+            
+            ForEach(model.lineItems, id: \.self) { item in
+                HStack {
+                    Text(item.title)
+                        .modifier(Headline())
+                    Text(item.description)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
 
-//    private var imagesView: some View {
-//        GeometryReader { proxy in
-//            ScrollView(.horizontal) {
-//                LazyHStack(alignment: .center, spacing: 0) {
-//                    ForEach(carItem.images) { image in
-//                        ImageView(urlString: image.url)
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: proxy.size.width, height: 300, alignment: .center)
-//                            .border(.blue)
-//                            .clipped()
-//                    }
-//                }
-//            }
-//        }
-//        .frame(height: 300)
-//    }
+    private func imagesView(with images: [CarDetailsModel.Image]) -> some View {
+        GeometryReader { proxy in
+            ScrollView(.horizontal) {
+                LazyHStack(alignment: .center, spacing: 0) {
+                    ForEach(images) { image in
+                        ImageView(urlString: image.urlString)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: proxy.size.width, height: 300, alignment: .center)
+                            .border(.blue)
+                            .clipped()
+                    }
+                }
+            }
+        }
+        .frame(height: 300)
+    }
 }
 
 //#Preview {

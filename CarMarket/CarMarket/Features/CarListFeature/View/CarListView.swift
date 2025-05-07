@@ -36,8 +36,13 @@ struct CarListView: View {
                     }
                 }
                 .refreshable {
-                    await viewModel.loadCars()
+                    Task.detached {
+                        await viewModel.loadCars()
+                    }
                 }
+            }
+            if viewModel.isLoading {
+                ProgressView()
             }
             if let errorMessage = viewModel.infoMessage {
                 Text(errorMessage)

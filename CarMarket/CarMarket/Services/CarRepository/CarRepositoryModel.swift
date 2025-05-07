@@ -12,11 +12,18 @@ struct CarRepositoryModel {
     var price: Int
     let firstRegistration: String?
     let mileage: Int
-    let fuel: String
+    let fuel: Fuel
     let imageStrings: [String]?
     let description: String
     let modelline: String?
     let seller: Seller?
+    
+    enum Fuel {
+        case gasoline
+        case diesel
+        case electric
+        case unknown
+    }
     
     struct Seller {
         let type: String

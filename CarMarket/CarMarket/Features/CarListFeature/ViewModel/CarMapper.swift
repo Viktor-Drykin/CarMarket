@@ -8,32 +8,20 @@ import Foundation
 
 struct CarMapper {
     
-    private let localisationProvider: CarListLocalisationProvider
+    private let localisationProvider: CarListLocalisationProviding
     
-    init(localisationProvider: CarListLocalisationProvider) {
+    init(localisationProvider: CarListLocalisationProviding) {
         self.localisationProvider = localisationProvider
     }
 
     func map(response: [CarRepositoryModel]) -> [CarListModel] {
         response.map { carModel in
-            let price = NumberFormatter.currency.string(from: NSNumber(value: carModel.price)) ?? localisationProvider.priceIsNotSet
             return .init(
                 id: carModel.id,
                 model: "\(carModel.make) \(carModel.model)",
-                price: price,
+                price: localisationProvider.price(from: carModel.price),
                 image: carModel.imageStrings?.first.map { .init(url: $0) }
             )
         }
     }
-}
-
-private extension NumberFormatter {
-    static let currency: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.currencyCode = "EUR"
-        formatter.currencySymbol = "€"
-        formatter.maximumFractionDigits = 0
-        formatter.numberStyle = .currency
-        return formatter
-    }()
 }
