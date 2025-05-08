@@ -82,4 +82,17 @@ final class CarDetailsMapperTests: XCTestCase {
         // Then
         XCTAssertTrue(result.images.isEmpty)
     }
+    
+    func test_map_whenImagesAreNil_returnsEmptyArray() {
+        // Given
+        let model = CarRepositoryModelBuilder()
+            .setImageStrings(nil)
+            .build()
+
+        // When
+        let result = sut.map(model: model)
+        
+        // Then
+        XCTAssertTrue(result.images.isEmpty)
+    }
 }

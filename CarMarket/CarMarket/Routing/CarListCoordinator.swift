@@ -24,7 +24,7 @@ final class CarsCoordinator {
 
     func start() {
         let viewController = featureFactory.makeCarListFeature(routes: self)
-        navigationController.pushViewController(viewController, animated: false)
+        navigationController.viewControllers = [viewController]
     }
 }
 
