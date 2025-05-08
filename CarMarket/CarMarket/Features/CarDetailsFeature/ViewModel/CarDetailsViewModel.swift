@@ -13,16 +13,16 @@ final class CarDetailsViewModel: ObservableObject {
     @MainActor @Published var message: String?
 
     private let carService: CarDetailsProviding
-    private let localisationProvider: CarDetailsLocalisationProviding
+    private let localizationProvider: CarDetailsLocalizationProviding
     private let mapper: CarDetailsMapper
     private let carID: Int
 
     init(carService: CarDetailsProviding,
-         localisationProvider: CarDetailsLocalisationProviding,
+         localizationProvider: CarDetailsLocalizationProviding,
          carID: Int) {
         self.carService = carService
-        self.localisationProvider = localisationProvider
-        self.mapper = CarDetailsMapper(localisationProvider: localisationProvider)
+        self.localizationProvider = localizationProvider
+        self.mapper = CarDetailsMapper(localizationProvider: localizationProvider)
         self.carID = carID
     }
 
@@ -37,7 +37,7 @@ final class CarDetailsViewModel: ObservableObject {
     }
     
     @MainActor private func handleEmptyState() async {
-        message = localisationProvider.noDetails
+        message = localizationProvider.noDetails
         carDetailsModel = nil
     }
     

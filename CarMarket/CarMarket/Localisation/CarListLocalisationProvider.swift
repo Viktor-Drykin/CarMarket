@@ -1,12 +1,12 @@
 //
-//  CarListLocalisationProvider.swift
+//  CarListLocalizationProvider.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 06.05.2025.
 //
 import Foundation
 
-protocol CarListLocalisationProviding {
+protocol CarListLocalizationProviding {
     var noCarsMessage: String { get }
     var invalidRequestDataMessage: String { get }
     var failedToDecodeMessage: String { get }
@@ -15,17 +15,15 @@ protocol CarListLocalisationProviding {
     func price(from price: Int) -> String
 }
 
-struct CarListLocalisationProvider: CarListLocalisationProviding {
+struct CarListLocalizationProvider: CarListLocalizationProviding {
     
     var noCarsMessage: String { "There are no cars" }
     var invalidRequestDataMessage: String { "There is an error with request" }
     var failedToDecodeMessage: String { "There is an error with decoding" }
     var unknownErrorMessage: String { "Something went wrong" }
     
-    private var priceIsNotSet: String { "Check the price with the owner" }
-    
     func price(from price: Int) -> String {
-        NumberFormatter.currency.string(from: NSNumber(value: price)) ?? priceIsNotSet
+        NumberFormatter.currency.string(from: NSNumber(value: price)) ?? "Check the price with the owner"
     }
 }
 

@@ -11,22 +11,21 @@ import SwiftUI
 final class Launcher {
     
     private let window: UIWindow?
-    private let navigationController: UINavigationController
-    private var router: DefaultRouter
+    private var coordinator: CarsCoordinator
 
     init(window: UIWindow?) {
         self.window = window
-        let engine = Engine()
+        let localisationEngine = LocalizationEngine()
+        let engine = Engine(localizationEngine: localisationEngine)
         let featureFactory = FeaturesFactory(engine: engine)
-        router = DefaultRouter(rootTransition: EmptyTransition(), featureFactory: featureFactory)
-        navigationController = UINavigationController()
+        let navigationController = UINavigationController()
+        coordinator = CarsCoordinator(navigationController: navigationController, featureFactory: featureFactory)
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     func start() {
-        let carListViewController = router.makeCarList()
-        navigationController.viewControllers = [carListViewController]
-        self.window?.rootViewController = navigationController
+        self.window?.rootViewController = coordinator.rootController
+        coordinator.start()
         self.window?.makeKeyAndVisible()
     }
 }

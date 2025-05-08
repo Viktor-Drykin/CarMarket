@@ -14,14 +14,14 @@ final class CarListViewModel: ObservableObject {
     @MainActor @Published var cars: [CarListModel] = []
 
     private let carService: CarsFetchable
-    private let localisationProvider: CarListLocalisationProviding
-    private let mapper: CarMapper
+    private let localizationProvider: CarListLocalizationProviding
+    private let mapper: CarListMapper
     private let router: CarDetailsRoute
 
-    init(carService: CarsFetchable, localisationProvider: CarListLocalisationProviding, router: CarDetailsRoute) {
+    init(carService: CarsFetchable, localizationProvider: CarListLocalizationProviding, router: CarDetailsRoute) {
         self.carService = carService
-        self.localisationProvider = localisationProvider
-        self.mapper = CarMapper(localisationProvider: localisationProvider)
+        self.localizationProvider = localizationProvider
+        self.mapper = CarListMapper(localizationProvider: localizationProvider)
         self.router = router
     }
 
@@ -42,7 +42,7 @@ final class CarListViewModel: ObservableObject {
     @MainActor private func handleState(cars mappedCars: [CarListModel]) async {
         isLoading = false
         cars = mappedCars
-        infoMessage = cars.isEmpty ? localisationProvider.noCarsMessage : nil
+        infoMessage = cars.isEmpty ? localizationProvider.noCarsMessage : nil
     }
     
     @MainActor private func handleState(error: Error) async {
@@ -54,11 +54,11 @@ final class CarListViewModel: ObservableObject {
     private func handle(error: Error) -> String {
         switch error {
         case CarRepositoryError.invalidRequestData:
-            return localisationProvider.invalidRequestDataMessage
+            return localizationProvider.invalidRequestDataMessage
         case CarRepositoryError.failedToDecode:
-            return localisationProvider.failedToDecodeMessage
+            return localizationProvider.failedToDecodeMessage
         default:
-            return localisationProvider.unknownErrorMessage
+            return localizationProvider.unknownErrorMessage
         }
     }
 }

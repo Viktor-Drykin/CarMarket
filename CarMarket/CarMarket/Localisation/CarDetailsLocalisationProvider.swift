@@ -1,12 +1,12 @@
 //
-//  CarDetailsLocalisationProvider.swift
+//  CarDetailsLocalizationProvider.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 06.05.2025.
 //
 import Foundation
 
-protocol CarDetailsLocalisationProviding {
+protocol CarDetailsLocalizationProviding {
     var noDetails: String { get }
     var gasolineFuel: String { get }
     var dieselFuel: String { get }
@@ -23,9 +23,8 @@ protocol CarDetailsLocalisationProviding {
     func mileage(for mileage: Int) -> String
 }
 
-struct CarDetailsLocalisationProvider: CarDetailsLocalisationProviding {
+struct CarDetailsLocalizationProvider: CarDetailsLocalizationProviding {
     
-    var priceIsNotSet: String { "Check the price with the owner" }
     var noDetails: String { "No details found" }
     var gasolineFuel: String { "Gasoline" }
     var dieselFuel: String { "Diesel" }
@@ -39,7 +38,7 @@ struct CarDetailsLocalisationProvider: CarDetailsLocalisationProviding {
     var sellerTitle: String { "Seller" }
     
     func price(for price: Int) -> String {
-        NumberFormatter.currency.string(from: NSNumber(value: price)) ?? priceIsNotSet
+        NumberFormatter.currency.string(from: NSNumber(value: price)) ?? "Check the price with the owner"
     }
     
     func mileage(for mileage: Int) -> String {

@@ -12,18 +12,18 @@ import XCTest
 final class CarListViewModelTests: XCTestCase {
 
     private var carService: CarsFetchableMock!
-    private var localisation: CarListLocalisationProviderMock!
+    private var localization: CarListLocalizationProviderMock!
     private var router: CarDetailsRouterSpy!
     private var sut: CarListViewModel!
 
     override func setUp() {
         super.setUp()
         carService = CarsFetchableMock()
-        localisation = CarListLocalisationProviderMock()
+        localization = CarListLocalizationProviderMock()
         router = CarDetailsRouterSpy()
         sut = CarListViewModel(
             carService: carService,
-            localisationProvider: localisation,
+            localizationProvider: localization,
             router: router
         )
     }
@@ -68,7 +68,7 @@ final class CarListViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.infoMessage, localisation.noCarsMessage)
+        XCTAssertEqual(sut.infoMessage, localization.noCarsMessage)
         XCTAssertTrue(sut.cars.isEmpty)
     }
 
@@ -81,7 +81,7 @@ final class CarListViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.infoMessage, localisation.failedToDecodeMessage)
+        XCTAssertEqual(sut.infoMessage, localization.failedToDecodeMessage)
         XCTAssertTrue(sut.cars.isEmpty)
     }
 
@@ -94,7 +94,7 @@ final class CarListViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.infoMessage, localisation.invalidRequestDataMessage)
+        XCTAssertEqual(sut.infoMessage, localization.invalidRequestDataMessage)
         XCTAssertTrue(sut.cars.isEmpty)
     }
 
@@ -107,7 +107,7 @@ final class CarListViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.infoMessage, localisation.unknownErrorMessage)
+        XCTAssertEqual(sut.infoMessage, localization.unknownErrorMessage)
         XCTAssertTrue(sut.cars.isEmpty)
     }
 

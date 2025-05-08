@@ -11,12 +11,12 @@ import XCTest
 final class CarDetailsMapperTests: XCTestCase {
 
     private var sut: CarDetailsMapper!
-    private var localisation: CarDetailsLocalisationProviderMock!
+    private var localization: CarDetailsLocalizationProviderMock!
 
     override func setUp() {
         super.setUp()
-        localisation = CarDetailsLocalisationProviderMock()
-        sut = CarDetailsMapper(localisationProvider: localisation)
+        localization = CarDetailsLocalizationProviderMock()
+        sut = CarDetailsMapper(localizationProvider: localization)
     }
 
     func test_map_whenGetModel_returnMappedModelCorrectly() {

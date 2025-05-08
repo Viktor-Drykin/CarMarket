@@ -80,7 +80,7 @@ struct CarListView: View {
 #Preview {
     let viewModel = CarListViewModel(
         carService: CarsFetchableMock(),
-        localisationProvider: CarListLocalisationProviderMock(),
+        localizationProvider: CarListLocalizationProviderMock(),
         router: CarDetailsRouterSpy()
     )
     let view = CarListView(viewModel: viewModel)

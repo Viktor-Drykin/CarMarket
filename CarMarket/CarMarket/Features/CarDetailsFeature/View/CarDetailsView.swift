@@ -71,7 +71,7 @@ struct CarDetailsView: View {
     carService.result = CarRepositoryModelBuilder().build()
     let viewModel = CarDetailsViewModel(
         carService: carService,
-        localisationProvider: CarDetailsLocalisationProviderMock(),
+        localizationProvider: CarDetailsLocalizationProviderMock(),
         carID: 0
     )
     return CarDetailsView(viewModel: viewModel)

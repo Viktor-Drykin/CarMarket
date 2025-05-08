@@ -8,12 +8,21 @@ import Foundation
 
 final class LocalizationEngine {
     
-    private let locale: Locale
-    
-    init(locale: Locale) {
-        self.locale = locale
-    }
-    
-    public private(set) lazy var carListLocalisationProvider: CarListLocalisationProviding = CarListLocalisationProvider()
-    public private(set) lazy var carDetailsLocalisationProvider: CarDetailsLocalisationProviding = CarDetailsLocalisationProvider()
+    private(set) lazy var carListLocalizationProvider: CarListLocalizationProviding = CarListLocalizationProvider()
+    private(set) lazy var carDetailsLocalizationProvider: CarDetailsLocalizationProviding = CarDetailsLocalizationProvider()
+}
+
+extension LocalizationEngine: LocalizationProviding {}
+
+typealias LocalizationProviding = (
+    HasCarListLocalizationProviding &
+    HasCarDetailsLocalizationProviding
+)
+
+protocol HasCarListLocalizationProviding {
+    var carListLocalizationProvider: CarListLocalizationProviding { get }
+}
+
+protocol HasCarDetailsLocalizationProviding {
+    var carDetailsLocalizationProvider: CarDetailsLocalizationProviding { get }
 }

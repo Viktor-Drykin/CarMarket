@@ -1,12 +1,12 @@
 //
-//  MockLocalisationProvider.swift
+//  MockLocalizationProvider.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 07.05.2025.
 //
 import Foundation
 
-struct CarDetailsLocalisationProviderMock: CarDetailsLocalisationProviding {
+struct CarDetailsLocalizationProviderMock: CarDetailsLocalizationProviding {
     var noDetails = "No details"
     var gasolineFuel = "Gasoline"
     var dieselFuel = "Diesel"

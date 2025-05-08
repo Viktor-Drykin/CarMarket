@@ -1,12 +1,12 @@
 //
-//  MockLocalisationProvider.swift
+//  MockLocalizationProvider.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 07.05.2025.
 //
 import Foundation
 
-final class CarListLocalisationProviderMock: CarListLocalisationProviding {
+final class CarListLocalizationProviderMock: CarListLocalizationProviding {
     var noCarsMessage: String = "No cars"
     var invalidRequestDataMessage: String = "Invalid request"
     var failedToDecodeMessage: String = "Decode failed"

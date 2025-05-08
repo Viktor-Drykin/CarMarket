@@ -8,26 +8,30 @@ import Foundation
 
 final class Engine {
     
-    private let networkService: NetworkService = NetworkClient()
-    
-    let localisationEngine = LocalizationEngine(locale: .current)
-    lazy var carNetworkService: CarNetworkService = CarNetworkServiceImpl(networkService: networkService)
-    lazy var carService: CarsFetchable & CarDetailsProviding = CarRepositoryImpl(carNetworkService: carNetworkService)
-    
+    let localizationEngine: LocalizationProviding
+
     var carsFetchableService: CarsFetchable { carService }
     var carDetailsProvidingService: CarDetailsProviding { carService }
+    
+    private let networkService: NetworkService = NetworkClient()
+    private lazy var carNetworkService: CarNetworkService = CarNetworkServiceImpl(networkService: networkService)
+    private lazy var carService: CarsFetchable & CarDetailsProviding = CarRepositoryImpl(carNetworkService: carNetworkService)
+    
+    init(localizationEngine: LocalizationProviding) {
+        self.localizationEngine = localizationEngine
+    }
 }
 
-extension Engine: HasServices {}
+extension Engine: AppDependencies {}
 
-typealias HasServices = (
+typealias AppDependencies = (
     HasLocalizationEngine &
     HasCarsFetchableService &
     HasCarDetailsProvidingService
 )
 
 protocol HasLocalizationEngine {
-    var localisationEngine: LocalizationEngine { get }
+    var localizationEngine: LocalizationProviding { get }
 }
 
 protocol HasCarsFetchableService {

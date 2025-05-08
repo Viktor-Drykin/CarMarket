@@ -8,23 +8,23 @@
 import SwiftUI
 
 protocol FeaturesFactoryInterface {
-    func makeCarListFeature(router: CarDetailsRoute) -> UIViewController
+    func makeCarListFeature(routes: CarDetailsRoute) -> UIViewController
     func makeCarDetailsFeature(carId: Int) -> UIViewController
 }
 
 final class FeaturesFactory: FeaturesFactoryInterface {
     
-    let engine: HasServices
+    let engine: AppDependencies
     
-    init(engine: HasServices) {
+    init(engine: AppDependencies) {
         self.engine = engine
     }
     
-    func makeCarListFeature(router: CarDetailsRoute) -> UIViewController {
+    func makeCarListFeature(routes: CarDetailsRoute) -> UIViewController {
         let viewModel = CarListViewModel(
             carService: engine.carsFetchableService,
-            localisationProvider:  engine.localisationEngine.carListLocalisationProvider,
-            router: router
+            localizationProvider:  engine.localizationEngine.carListLocalizationProvider,
+            router: routes
         )
         let view = CarListView(viewModel: viewModel)
         let viewController = UIHostingController(rootView: view)
@@ -34,7 +34,7 @@ final class FeaturesFactory: FeaturesFactoryInterface {
     func makeCarDetailsFeature(carId: Int) -> UIViewController {
         let viewModel = CarDetailsViewModel(
             carService: engine.carDetailsProvidingService,
-            localisationProvider: engine.localisationEngine.carDetailsLocalisationProvider,
+            localizationProvider: engine.localizationEngine.carDetailsLocalizationProvider,
             carID: carId
         )
         let view = CarDetailsView(viewModel: viewModel)

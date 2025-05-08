@@ -8,40 +8,40 @@ import Foundation
 
 struct CarDetailsMapper {
     
-    private let localisationProvider: CarDetailsLocalisationProviding
+    private let localizationProvider: CarDetailsLocalizationProviding
     
-    init(localisationProvider: CarDetailsLocalisationProviding) {
-        self.localisationProvider = localisationProvider
+    init(localizationProvider: CarDetailsLocalizationProviding) {
+        self.localizationProvider = localizationProvider
     }
     
     func map(model: CarRepositoryModel) -> CarDetailsModel {
         let modelItem = CarDetailsModel.LineItem(
-            title: localisationProvider.modelTitle,
+            title: localizationProvider.modelTitle,
             description: "\(model.make) \(model.model)"
         )
         
         let fuelItem = CarDetailsModel.LineItem(
-            title: localisationProvider.fuelTitle,
+            title: localizationProvider.fuelTitle,
             description: map(fuel: model.fuel)
         )
         
         let priceItem = CarDetailsModel.LineItem(
-            title: localisationProvider.priceTitle,
-            description: localisationProvider.price(for: model.price)
+            title: localizationProvider.priceTitle,
+            description: localizationProvider.price(for: model.price)
         )
         let mileageItem = CarDetailsModel.LineItem(
-            title: localisationProvider.mileageTitle,
-            description: localisationProvider.mileage(for: model.mileage)
+            title: localizationProvider.mileageTitle,
+            description: localizationProvider.mileage(for: model.mileage)
         )
         let descriptionItem = CarDetailsModel.LineItem(
-            title: localisationProvider.descriptionTitle,
+            title: localizationProvider.descriptionTitle,
             description: model.description
         )
         
         let sellerItem: CarDetailsModel.LineItem? = {
             guard let seller = model.seller else { return nil }
             return .init(
-                title: localisationProvider.sellerTitle,
+                title: localizationProvider.sellerTitle,
                 description: "\(seller.city), \(seller.phone), \(seller.type)"
             )
         }()
@@ -64,13 +64,13 @@ struct CarDetailsMapper {
     private func map(fuel: CarRepositoryModel.Fuel) -> String {
         switch fuel {
         case .gasoline:
-            localisationProvider.gasolineFuel
+            localizationProvider.gasolineFuel
         case .diesel:
-            localisationProvider.dieselFuel
+            localizationProvider.dieselFuel
         case .electric:
-            localisationProvider.electricFuel
+            localizationProvider.electricFuel
         case .unknown:
-            localisationProvider.unknownFuel
+            localizationProvider.unknownFuel
         }
     }
     

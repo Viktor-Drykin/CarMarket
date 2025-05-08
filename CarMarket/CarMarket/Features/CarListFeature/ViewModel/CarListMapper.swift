@@ -1,17 +1,17 @@
 //
-//  CarMapper.swift
+//  CarListMapper.swift
 //  CarMarket
 //
 //  Created by Viktor Drykin on 19.12.2024.
 //
 import Foundation
 
-struct CarMapper {
+struct CarListMapper {
     
-    private let localisationProvider: CarListLocalisationProviding
+    private let localizationProvider: CarListLocalizationProviding
     
-    init(localisationProvider: CarListLocalisationProviding) {
-        self.localisationProvider = localisationProvider
+    init(localizationProvider: CarListLocalizationProviding) {
+        self.localizationProvider = localizationProvider
     }
 
     func map(response: [CarRepositoryModel]) -> [CarListModel] {
@@ -19,7 +19,7 @@ struct CarMapper {
             return .init(
                 id: carModel.id,
                 model: "\(carModel.make) \(carModel.model)",
-                price: localisationProvider.price(from: carModel.price),
+                price: localizationProvider.price(from: carModel.price),
                 image: carModel.imageStrings?.first.map { .init(url: $0) }
             )
         }
