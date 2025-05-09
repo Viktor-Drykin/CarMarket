@@ -94,9 +94,27 @@ final class CarRepositoryImplTests: XCTestCase {
         XCTAssertEqual(castedError, .failedToDecode)
     }
 
-    func test_fetchCars_whenCatchInvalidRequestDataError_throwsInvalidRequestData() async throws {
+    func test_fetchCars_whenCatchInvalidStatusCodeError_throwsInvalidRequestData() async throws {
         // Given
         networkServiceMock.result = .failure(.invalidStatusCode)
+        var expectedError: Error?
+        
+        // When
+        do {
+            _ = try await sut.fetchCars()
+            XCTFail("The method should throw an error")
+        } catch {
+            expectedError = error
+        }
+        
+        // Then
+        let castedError = try XCTUnwrap(expectedError as? CarRepositoryError)
+        XCTAssertEqual(castedError, .invalidRequestData)
+    }
+    
+    func test_fetchCars_whenCatchInvalidRequestDataError_throwsInvalidRequestData() async throws {
+        // Given
+        networkServiceMock.result = .failure(.incorrectURL)
         var expectedError: Error?
         
         // When
