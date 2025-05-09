@@ -1,7 +1,7 @@
 # CarMarket
 
 This app requests the list of cars from the network, displays this list and shows the details of the selected car on a separate screen.
-Just run `CarMarket.xcodeproj`
+Just run `CarMarket.xcodeproj`. Minimum deployment target is iOS 15.
 
 #### Responsibilities:
 - `NetworkService` - making requests
