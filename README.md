@@ -13,7 +13,8 @@ Just run `CarMarket.xcodeproj`. Minimum deployment target is iOS 15.
 
 
 ### Design Diagram
-![CarMarket_light](https://github.com/user-attachments/assets/16a57136-0edd-4048-a00a-f4973b0f8b08)
+![CarMarket](https://github.com/user-attachments/assets/f7dc26ba-25ba-4a81-8a5b-2d012ff55a59)
+
 
 ### Showcase
 https://github.com/user-attachments/assets/2e9767a7-f0a3-4e80-9d4b-13f9bb7dcb55
